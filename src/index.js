@@ -146,7 +146,7 @@ export default class ScrollableTabView extends React.Component {
     this._initial();
   }
 
-  UNSAFE_componentWillReceiveProps(newProp) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this._initial(newProps, true);
   }
 
