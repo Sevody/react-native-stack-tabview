@@ -36,11 +36,6 @@ const CONSOLE_LEVEL = {
   ERROR: 'error',
 };
 
-/**
- * @author itenl
- * @class ScrollableTabView
- * @extends {React.Component}
- */
 export default class ScrollableTabView extends React.Component {
   static propTypes = {
     stacks: PropTypes.array.isRequired,
@@ -136,7 +131,6 @@ export default class ScrollableTabView extends React.Component {
     scrollOffset: 10,
     extraTabBar: null,
   };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -249,7 +243,7 @@ export default class ScrollableTabView extends React.Component {
   _getBadges(props) {
     return (
       props.stacks &&
-      props.stacks.map((item) => {
+      props.stacks.map(item => {
         return item.badge ?? null;
       })
     );
@@ -279,7 +273,7 @@ export default class ScrollableTabView extends React.Component {
   }
 
   _setCurrentRef(index, id) {
-    return (ref) => {
+    return ref => {
       if (this.state.refsObj[index] && this.state.refsObj[index] === ref) return;
       this.state.refsObj[index] = ref;
       this.state.refsObj[index].__id__ = id;
@@ -289,7 +283,7 @@ export default class ScrollableTabView extends React.Component {
     };
   }
 
-  clearStacks = (callback) => {
+  clearStacks = callback => {
     this.tabs = [];
     this.badges = [];
     this.stacks = [];
@@ -305,13 +299,13 @@ export default class ScrollableTabView extends React.Component {
     return this.state.refsObj[index ?? this.state.checkedIndex];
   }
 
-  toTabView = (indexOrLabel) => {
+  toTabView = indexOrLabel => {
     switch (typeof indexOrLabel) {
       case 'number':
         this._onTabviewChange(false, indexOrLabel);
         break;
       case 'string':
-        const tab = this.tabs.filter((f) => f.tabLabel == indexOrLabel)[0];
+        const tab = this.tabs.filter(f => f.tabLabel == indexOrLabel)[0];
         if (tab) {
           this._onTabviewChange(false, tab.index);
         }
@@ -323,7 +317,7 @@ export default class ScrollableTabView extends React.Component {
    * y 轴偏移量，0以Tab为基准点
    * @memberof ScrollableTabView
    */
-  _scrollTo = (y) => {
+  _scrollTo = y => {
     const sectionList = this.section?.getNode();
     if (typeof y === 'number' && sectionList?.scrollToLocation) {
       sectionList.scrollToLocation({
@@ -368,13 +362,13 @@ export default class ScrollableTabView extends React.Component {
       },
       !!screen && {
         initScreen: () => initScreen(screen),
-        onRefresh: (callback) => {
+        onRefresh: callback => {
           if (!screen.onRefresh) {
             screen.onRefresh = () => callback(this._toggledRefreshing);
           }
           onRefresh(screen, callback);
         },
-        onEndReached: (callback) => onEndReached(screen, callback),
+        onEndReached: callback => onEndReached(screen, callback),
       },
       props || {}
     );
@@ -407,7 +401,7 @@ export default class ScrollableTabView extends React.Component {
         this._displayConsole(
           'When useScroll and badges exist at the same time, the badge will not overflow the Tabs container'
         );
-      return _badges.map((item) => {
+      return _badges.map(item => {
         return item;
       });
     }
@@ -528,7 +522,7 @@ export default class ScrollableTabView extends React.Component {
     const { errorToThrow } = this.props;
     const pluginName = 'ScrollableTabView';
     const msg = `${pluginName}: ${message || ' --- '}`;
-    (console)[level](msg);
+    console[level](msg);
     if (errorToThrow && level == CONSOLE_LEVEL.ERROR) throw new Error(msg);
   }
 
@@ -539,7 +533,7 @@ export default class ScrollableTabView extends React.Component {
       tabStyle: ['left', 'right'],
     };
     if (errorProps[propName] && property) {
-      errorProps[propName].forEach((errorProperty) => {
+      errorProps[propName].forEach(errorProperty => {
         if (errorProperty in property) {
           this._displayConsole(`Prop ${propName} is not allowed to configure the ${errorProperty} property`, level);
         }
@@ -628,12 +622,6 @@ export default class ScrollableTabView extends React.Component {
     const { useScroll, scrollOffset } = this.props;
     const width = this.tabWidthWrap || this.tabWidth;
     const measurement = this.tabsMeasurements[index];
-    console.log('%c [ measurement ]-533', 'font-size:13px; background:pink; color:#bf2c9f;', measurement);
-    console.log(
-      '%c [ (index - 1) * width + width / 2 ]-537',
-      'font-size:13px; background:pink; color:#bf2c9f;',
-      (index - 1) * width + width / 2
-    );
     if (useScroll && this.scrollview && width) {
       this.scrollview.scrollTo({
         x: measurement.left - scrollOffset,
@@ -733,10 +721,6 @@ export default class ScrollableTabView extends React.Component {
   _onEndReached() {
     const next = () => {
       const ref = this.getCurrentRef();
-      !ref &&
-        this._displayConsole(
-          `The Screen Ref is lost when calling onEndReached. Please confirm whether the Stack is working properly.(index: ${this.state.checkedIndex})`
-        );
       !!ref && this.isClassCompoent(ref.constructor)
         ? ref && ref.onEndReached && typeof ref.onEndReached === 'function' && ref.onEndReached()
         : triggerEndReached(ref);
@@ -772,7 +756,7 @@ export default class ScrollableTabView extends React.Component {
     onBeforeRefresh && typeof onBeforeRefresh === 'function' ? onBeforeRefresh(next, this._toggledRefreshing) : next();
   }
 
-  _renderHeader = (isRender) => {
+  _renderHeader = isRender => {
     const { header } = this.props;
     return (
       header &&
@@ -884,7 +868,7 @@ export default class ScrollableTabView extends React.Component {
       >
         {this._renderTitle()}
         <AnimatedSectionList
-          ref={(rf) => (this.section = rf)}
+          ref={rf => (this.section = rf)}
           keyExtractor={(item, index) => `scrollable-tab-view-wrap-${index}`}
           renderSectionHeader={this._renderSectionHeader}
           onEndReached={this._onEndReached}
