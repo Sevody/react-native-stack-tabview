@@ -1,0 +1,23 @@
+{
+  "name": "react-native-customer-stack-tabview",
+  "version": "1.0.0",
+  "description": "react-native-customer-stack-tabview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lodash.throttle": "^4.1.1",
+    "react-native-snap-carousel": "^4.0.0-beta.6"
+  },
+  "keywords": [
+    "react",
+    "sticky",
+    "tabbar",
+    "tabview",
+    "react-native",
+    "scrollabletabview"
+  ],
+  "author": "sevody",
+  "license": "MIT"
+}
