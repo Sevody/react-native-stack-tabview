@@ -1,10 +1,8 @@
-# react-native-scrollable-tabview
+# react-native-customer-tabview
 
 Based on pure `JS` scripts, without relying on native, no need for `react-native link`,`Title` / `Header` / `Tabs` / `Sticky` / `Screen` components can be flexibly configured, among which `Tabs` / `Sticky` can slide When it reaches the top, it will be topped; what we support is to independently manage its own `Sticky` / `Screen` / `Badge` / `tabLabel` configuration in the form of a stack, and inject the `Screen` [lifecycle](#InjectionLifecycle) `onRefresh` / `onEndReached` They will be triggered when the pull-down refresh and the scroll bar hit the bottom, and finally inject more into `Screen` / `Sticky` [props](#InjectionScreenProps)
 
 ##### Table of Contents
-* [Example-API](https://github.com/itenl/react-native-scrollable-tabview-example-app)
-* [Example-TikTok](https://github.com/itenl/react-native-scrollable-tabview-example-tiktok)
 * [Features](#features)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -22,24 +20,24 @@ Based on pure `JS` scripts, without relying on native, no need for `react-native
 * Flex Tabs and multiple Tabs horizontal scrolling support configuration method
 * Allow to set up each Screen’s own Sticky component
 * Custom badges can be configured for each Tab
-* Support pull down to refresh and slide up to load more pre-functions `onBeforeRefresh` / `onBeforeEndReached` 
+* Support pull down to refresh and slide up to load more pre-functions `onBeforeRefresh` / `onBeforeEndReached`
 * Support animation title, can support animation as `interpolate.opacity` and `interpolate.height`
 
 ## <a name="installation"/>Installation
 
 ```shell
-npm i @itenl/react-native-scrollable-tabview
+npm i react-native-customer-tabview
 ```
 or
 ```shell
-yarn add @itenl/react-native-scrollable-tabview
+yarn add react-native-customer-tabview
 ```
 
 ## <a name="usage"/>Usage
 
 ```jsx
 import React from 'react';
-import ScrollableTabView from '@itenl/react-native-scrollable-tabview';
+import ScrollableTabView from 'react-native-customer-tabview';
 
 function App() {
   return (
@@ -230,7 +228,7 @@ Prop              | Type     | Default     | Description
   <ScrollableTabView
     ref={rf => (this.scrollableTabView = rf)}
   >
-  </ScrollableTabView> 
+  </ScrollableTabView>
   this.scrollableTabView.getCurrentRef();
   this.scrollableTabView.toTabView(1);
   this.scrollableTabView.scrollTo(0);
@@ -262,7 +260,7 @@ Type     | Description
 JSX Element   | Badges/Hovering Tips, etc. rendered based on the current Tab
 
 
-##  <a name="InjectionLifecycle"/>Injection lifecycle to Screen (On Class Component) 
+##  <a name="InjectionLifecycle"/>Injection lifecycle to Screen (On Class Component)
 
 Name              | Type     | Description
 ----------------- | -------- | -----------
@@ -296,3 +294,4 @@ Name              | Type     | Description
 
 
 **MIT Licensed**
+

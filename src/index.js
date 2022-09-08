@@ -81,6 +81,8 @@ export default class ScrollableTabView extends React.Component {
     scrollOffset: PropTypes.number,
     extraTabBar: PropTypes.any,
     onTabsLayout: PropTypes.func,
+    disalbeOnRefresh: PropTypes.bool,
+    showsVerticalScrollIndicator: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -130,6 +132,8 @@ export default class ScrollableTabView extends React.Component {
     disableUnderLine: true,
     scrollOffset: 10,
     extraTabBar: null,
+    disalbeOnRefresh: false,
+    showsVerticalScrollIndicator: false,
   };
   constructor(props) {
     super(props);
@@ -622,7 +626,7 @@ export default class ScrollableTabView extends React.Component {
     const { useScroll, scrollOffset } = this.props;
     const width = this.tabWidthWrap || this.tabWidth;
     const measurement = this.tabsMeasurements[index];
-    if (useScroll && this.scrollview && width) {
+    if (useScroll && this.scrollview && width && measurement && measurement.left) {
       this.scrollview.scrollTo({
         x: measurement.left - scrollOffset,
         // x: (index - 1) * width + width / 2
@@ -645,10 +649,9 @@ export default class ScrollableTabView extends React.Component {
         return this._scrollTo(-(this.layoutHeight.header + this.layoutHeight.stickyHeader));
       if (!isCarouselScroll && toTabsOnTab) return this._scrollTo(0);
       return void 0;
+    } else {
+      if (!isCarouselScroll) this._scrollTo(0);
     }
-    // else {
-    //   if (!isCarouselScroll) this._scrollTo(0);
-    // }
     const state = {
       checkedIndex: index,
       lazyIndexs: this.state.lazyIndexs,
@@ -816,6 +819,9 @@ export default class ScrollableTabView extends React.Component {
   };
 
   _refreshControl() {
+    if (this.props.disalbeOnRefresh) {
+      return null;
+    }
     const ref = this.getCurrentRef();
     const enabled = !!(ref && ref.onRefresh) || refreshMap.has(ref);
     return <RefreshControl enabled={enabled} refreshing={this.state.isRefreshing} onRefresh={this._onRefresh} />;
@@ -856,7 +862,8 @@ export default class ScrollableTabView extends React.Component {
   }
 
   render() {
-    const { style, onEndReachedThreshold, fixedHeader, carouselProps, sectionListProps } = this.props;
+    const { style, onEndReachedThreshold, fixedHeader, carouselProps, sectionListProps, showsVerticalScrollIndicator } =
+      this.props;
     return (
       <View
         onLayout={({ nativeEvent }) => {
@@ -877,7 +884,7 @@ export default class ScrollableTabView extends React.Component {
           sections={[{ data: [1] }]}
           stickySectionHeadersEnabled={true}
           ListHeaderComponent={this._renderHeader(!fixedHeader)}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={showsVerticalScrollIndicator}
           showsHorizontalScrollIndicator={false}
           renderItem={() => {
             return (

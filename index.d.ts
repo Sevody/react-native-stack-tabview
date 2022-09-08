@@ -1,4 +1,4 @@
-declare module 'react-native-customer-stack-tab';
+declare module 'react-native-customer-tabview';
 
 export default ScrollableTabView;
 
