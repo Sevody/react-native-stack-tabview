@@ -1,4 +1,4 @@
-# react-native-customer-tabview
+# react-native-stack-tabview
 
 Based on pure `JS` scripts, without relying on native, no need for `react-native link`,`Title` / `Header` / `Tabs` / `Sticky` / `Screen` components can be flexibly configured, among which `Tabs` / `Sticky` can slide When it reaches the top, it will be topped; what we support is to independently manage its own `Sticky` / `Screen` / `Badge` / `tabLabel` configuration in the form of a stack, and inject the `Screen` [lifecycle](#InjectionLifecycle) `onRefresh` / `onEndReached` They will be triggered when the pull-down refresh and the scroll bar hit the bottom, and finally inject more into `Screen` / `Sticky` [props](#InjectionScreenProps)
 
@@ -26,18 +26,18 @@ Based on pure `JS` scripts, without relying on native, no need for `react-native
 ## <a name="installation"/>Installation
 
 ```shell
-npm i react-native-customer-tabview
+npm i react-native-stack-tabview
 ```
 or
 ```shell
-yarn add react-native-customer-tabview
+yarn add react-native-stack-tabview
 ```
 
 ## <a name="usage"/>Usage
 
 ```jsx
 import React from 'react';
-import ScrollableTabView from 'react-native-customer-tabview';
+import ScrollableTabView from 'react-native-stack-tabview';
 
 function App() {
   return (
@@ -294,4 +294,5 @@ Name              | Type     | Description
 
 
 **MIT Licensed**
+
 

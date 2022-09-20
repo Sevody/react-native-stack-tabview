@@ -1,7 +1,7 @@
 {
-  "name": "react-native-customer-tabview",
-  "version": "1.0.1",
-  "description": "react-native-customer-tabview",
+  "name": "react-native-stack-tabview",
+  "version": "1.0.0",
+  "description": "react-native-stack-tabview",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
